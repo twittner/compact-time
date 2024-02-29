@@ -1,6 +1,6 @@
 [package]
 name        = "compact-time"
-version     = "0.1.0"
+version     = "0.2.0"
 edition     = "2021"
 license     = "BlueOak-1.0.0"
 description = "64-bit nanosecond time representation with a range from 1970-01-01 00:00:00 to 2514-05-30 01:53:03"
@@ -18,7 +18,7 @@ executable = ["coarse", "utc", "clap"]
 
 [dependencies]
 cfg-if   = "1.0.0"
-minicbor = { version = "0.20.0", features = ["derive"] }
+minicbor = { version = "0.21.0", features = ["derive"] }
 serde    = { version = "1.0.185", features = ["derive"] }
 # optional:
 clap   = { version = "4.4.14", features = ["derive"], optional = true }
