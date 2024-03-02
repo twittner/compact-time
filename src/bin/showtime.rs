@@ -29,7 +29,7 @@ fn main() {
     let time = if let Some(s) = args.read {
         if let Some((s, n)) = s.split_once('.') {
             let secs: u64 = read(s);
-            let nano: u32 = read(n);
+            let nano: u64 = read(n);
             let mut time = Time::try_from_seconds(secs).ok();
             if !args.seconds {
                 time = time.and_then(|t| t.add_nanos_checked(nano));
@@ -69,7 +69,7 @@ fn main() {
     } else {
         let s = time.seconds();
         let n = if args.seconds { 0 } else { time.second_nanos() };
-        match tz::UtcDateTime::from_timespec(s as i64, n) {
+        match tz::UtcDateTime::from_timespec(s as i64, n as u32) {
             Ok(utc) => println!("{utc}"),
             Err(e)  => {
                 eprintln!("{e}");
