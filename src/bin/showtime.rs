@@ -30,11 +30,11 @@ fn main() {
         if let Some((s, n)) = s.split_once('.') {
             let secs: u64 = read(s);
             let nano: u64 = read(n);
-            let mut time = Time::try_from_seconds(secs).ok();
+            let mut time = Time::try_from_seconds(secs);
             if !args.seconds {
                 time = time.and_then(|t| t.add_nanos_checked(nano));
             }
-            if let Some(t) = time {
+            if let Ok(t) = time {
                 t
             } else {
                 eprintln!("value out of range");
@@ -43,11 +43,11 @@ fn main() {
         } else {
             let num: u64 = read(&s);
             let time = if args.seconds {
-                Time::try_from_seconds(num).ok()
+                Time::try_from_seconds(num)
             } else {
-                Time::try_from(num).ok()
+                Ok(Time::from(num))
             };
-            if let Some(t) = time {
+            if let Ok(t) = time {
                 t
             } else {
                 eprintln!("value out of range");
