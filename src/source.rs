@@ -17,7 +17,7 @@ struct Inner {
 }
 
 impl TimeSource {
-    /// Creata a new `TimeSource` which gets the current time ate the given frequency.
+    /// Create a new `TimeSource` which gets the current time at the given frequency.
     ///
     /// A thread is spawned to asynchronously getting the time.
     pub fn new(f: Duration) -> Self {
