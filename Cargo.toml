@@ -1,6 +1,6 @@
 [package]
 name        = "compact-time"
-version     = "0.2.0"
+version     = "0.3.0"
 edition     = "2021"
 license     = "BlueOak-1.0.0"
 description = "64-bit nanosecond time representation with a range from 1970-01-01 00:00:00 to 2554-07-21 23:34:33.709551615"
@@ -15,7 +15,7 @@ features = ["coarse", "utc", "minicbor", "serde"]
 coarse     = ["rustix"]
 utc        = ["tz-rs"]
 executable = ["coarse", "utc", "clap"]
-full       = ["coarse", "utc", "minicbor", "serde"] 
+full       = ["coarse", "utc", "minicbor", "serde"]
 
 [dependencies]
 cfg-if   = "1.0.0"
