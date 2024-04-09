@@ -9,7 +9,7 @@ keywords    = ["time"]
 categories  = ["date-and-time"]
 
 [package.metadata.docs.rs]
-features = ["coarse", "utc", "minicbor", "serde"]
+features = ["full"]
 
 [features]
 coarse     = ["rustix"]
@@ -18,8 +18,7 @@ executable = ["coarse", "utc", "clap"]
 full       = ["coarse", "utc", "minicbor", "serde"]
 
 [dependencies]
-cfg-if   = "1.0.0"
-minicbor = { version = "0.21.0", features = ["derive"], optional = true }
+minicbor = { version = "0.22.0", features = ["derive"], optional = true }
 serde    = { version = "1.0.185", features = ["derive"], optional = true }
 clap     = { version = "4.4.14", features = ["derive"], optional = true }
 rustix   = { version = "0.38.28", features = ["time"], optional = true }
