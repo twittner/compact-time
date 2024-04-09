@@ -1,4 +1,3 @@
-use cfg_if::cfg_if;
 use std::{sync::{atomic::{AtomicU64, Ordering, AtomicBool}, Arc}, thread::{self, JoinHandle}, time::Duration};
 use super::Time;
 
@@ -43,16 +42,7 @@ impl Inner {
 
         let thread = thread::spawn(move || {
             while !stop2.load(Ordering::Acquire) {
-                let now = {
-                    cfg_if! {
-                        if #[cfg(feature = "coarse")] {
-                            Time::coarse()
-                        } else {
-                            Time::now()
-                        }
-                    }
-                };
-                current2.fetch_max(now.into(), Ordering::AcqRel);
+                current2.fetch_max(now(), Ordering::AcqRel);
                 thread::sleep(f)
             }
         });
@@ -67,6 +57,16 @@ impl Inner {
     fn get(&self) -> Time {
         Time(self.current.load(Ordering::Acquire))
     }
+}
+
+#[cfg(feature = "coarse")]
+fn now() -> u64 {
+    Time::coarse().into()
+}
+
+#[cfg(not(feature = "coarse"))]
+fn now() -> u64 {
+    Time::now().into()
 }
 
 impl Drop for Inner {
