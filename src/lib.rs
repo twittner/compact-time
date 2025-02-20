@@ -13,7 +13,7 @@ const NANO: u64 = 1_000_000_000;
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "minicbor", derive(minicbor::Encode, minicbor::Decode), cbor(transparent))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize), serde(transparent))]
-pub struct Time(#[cfg_attr(feature = "minicbor", n(0))] u64);
+pub struct Time(u64);
 
 impl Time {
     /// The minimum time value (1970-01-01T00:00:00.000000000Z).
